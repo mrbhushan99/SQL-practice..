@@ -32,4 +32,36 @@ END;
 
 SELECT dbo.add_five(10) AS Result;
 
+CREATE FUNCTION ADD_5 (@num int )
+RETURNS int
+AS
+BEGIN 
+RETURN @num+5
+END;
+SELECT DBO.ADD_5(10) as result;
 
+CREATE FUNCTION  SQUARE_OF_NUM(@num INT )
+RETURNS INT
+AS
+BEGIN
+--@RESULT=SQ_NUM*SQ_NUM
+RETURN @num*@num
+end;
+SELECT dbo.SQUARE_OF_NUM(10) AS RESULT;
+--drop function DBO.square_OF_NUMBER;
+--DROP FUNCTION dbo.SQUARE_OF_NUM;
+
+
+--2.tABLE VALUED FUNCTION 
+
+--SEE FIRST EMP._SOURCE TABLE
+SELECT * FROM Employee_Source
+-- CREATING FUNCTION FOR SELECTING DATA OF ONLY MALE EMPLOYEES 
+CREATE FUNCTION SELECT_E_GENDER(@gender varchar(7))
+returns table
+AS
+RETURN(
+select * from Employee_Source where e_gender=@gender
+)
+
+SELECT * FROM  DBO.SELECT_E_GENDER('M')
